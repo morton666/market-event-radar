@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-30T09:28:10Z",
+  "query_started_at": "2026-09-30T08:43:11Z",
+  "range": {
+    "start_date": "2026-09-28",
+    "end_date": "2026-10-04",
+    "timezone": "America/New_York"
+  },
+  "filters": {
+    "instruments": [
+      "ES",
+      "NQ"
+    ],
+    "categories": [
+      "earnings"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": []
+  },
+  "coverage": {
+    "status": "partial",
+    "sources": [
+      {
+        "source_id": "earnings:NVDA",
+        "name": "NVDA 英伟达 财报",
+        "status": "not_announced",
+        "url": "https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "已通过浏览器加载活动列表；最近财报为 8 月 26 日，活动页未列下一次财报日期，不能按往年周期推算。"
+      },
+      {
+        "source_id": "earnings:AAPL",
+        "name": "AAPL 苹果 财报",
+        "status": "unavailable",
+        "url": "https://investor.apple.com/investor-relations/default.aspx",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "HTTP 抽取只取得投资者页面栏目，未取得财报日历正文；本次日期及发布／会议时间未核实。"
+      },
+      {
+        "source_id": "earnings:MSFT",
+        "name": "MSFT 微软 财报",
+        "status": "not_announced",
+        "url": "https://www.microsoft.com/en-us/investor/default",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "官方页面明确说明下一次财报日期将另行宣布。"
+      },
+      {
+        "source_id": "earnings:AMZN",
+        "name": "AMZN 亚马逊 财报",
+        "status": "unavailable",
+        "url": "https://ir.aboutamazon.com/events/default.aspx",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "活动页面为动态空壳；已读取官方新闻入口，但未取得完整财报日期公告，日期及发布／会议时间未核实。"
+      },
+      {
+        "source_id": "earnings:GOOGL",
+        "name": "GOOGL Alphabet 财报",
+        "status": "unavailable",
+        "url": "https://abc.xyz/investor/events/default.aspx",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "投资者主页及活动页只返回栏目，未取得动态事件列表；日期及发布／会议时间未核实。"
+      },
+      {
+        "source_id": "earnings:META",
+        "name": "META Meta 财报",
+        "status": "partial",
+        "url": "https://investor.atmeta.com/investor-events/default.aspx",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "页面显示等待后续活动信息，历史／完整动态列表未取得，不能确认查询范围内无财报。"
+      },
+      {
+        "source_id": "earnings:TSLA",
+        "name": "TSLA 特斯拉 财报",
+        "status": "not_announced",
+        "url": "https://ir.tesla.com/",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "2026 Q3 的 Earnings Date 字段为空；未提供该次财报发布及会议计划日期。"
+      },
+      {
+        "source_id": "earnings:AMD",
+        "name": "AMD AMD 财报",
+        "status": "not_announced",
+        "url": "https://ir.amd.com/news-events/ir-calendar",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "当前官方活动页明确无已安排的未来活动；最近列出的财报为 8 月 4 日，下一次日期未列出。"
+      },
+      {
+        "source_id": "earnings:SPCX",
+        "name": "SPCX SpaceX 财报",
+        "status": "not_announced",
+        "url": "https://ir.spacex.com/events/",
+        "checked_at": "2026-09-30T09:28:10Z",
+        "note": "浏览器已加载完整活动页，当前无未来活动；2026 年归档最近财报为 8 月 4 日，下一次日期未列出。"
+      }
+    ]
+  },
+  "imminent_event_ids": [],
+  "events": [],
+  "warnings": [
+    "NVDA 英伟达 财报：日期尚未宣布（已通过浏览器加载活动列表；最近财报为 8 月 26 日，活动页未列下一次财报日期，不能按往年周期推算。）",
+    "AAPL 苹果 财报：来源未读取（HTTP 抽取只取得投资者页面栏目，未取得财报日历正文；本次日期及发布／会议时间未核实。）",
+    "MSFT 微软 财报：日期尚未宣布（官方页面明确说明下一次财报日期将另行宣布。）",
+    "AMZN 亚马逊 财报：来源未读取（活动页面为动态空壳；已读取官方新闻入口，但未取得完整财报日期公告，日期及发布／会议时间未核实。）",
+    "GOOGL Alphabet 财报：来源未读取（投资者主页及活动页只返回栏目，未取得动态事件列表；日期及发布／会议时间未核实。）",
+    "META Meta 财报：部分核验（页面显示等待后续活动信息，历史／完整动态列表未取得，不能确认查询范围内无财报。）",
+    "TSLA 特斯拉 财报：日期尚未宣布（2026 Q3 的 Earnings Date 字段为空；未提供该次财报发布及会议计划日期。）",
+    "AMD AMD 财报：日期尚未宣布（当前官方活动页明确无已安排的未来活动；最近列出的财报为 8 月 4 日，下一次日期未列出。）",
+    "SPCX SpaceX 财报：日期尚未宣布（浏览器已加载完整活动页，当前无未来活动；2026 年归档最近财报为 8 月 4 日，下一次日期未列出。）"
+  ],
+  "summary_zh": "交易事件摘要｜2026-09-28 至 2026-10-04（美东日期）\n查询时刻：2026-09-30 05:28:10 EDT / 北京 2026-09-30 17:28:10\n关注品种：ES、NQ；来源覆盖：部分\n\n目前没有可确认的临近重点提醒；来源缺失或未知时间仍需关注。\n\n未获得可列出的事件；不能据此判断该范围没有事件。\n\n待核验范围：\n\n- NVDA 英伟达 财报：日期尚未宣布（已通过浏览器加载活动列表；最近财报为 8 月 26 日，活动页未列下一次财报日期，不能按往年周期推算。）\n- AAPL 苹果 财报：来源未读取（HTTP 抽取只取得投资者页面栏目，未取得财报日历正文；本次日期及发布／会议时间未核实。）\n- MSFT 微软 财报：日期尚未宣布（官方页面明确说明下一次财报日期将另行宣布。）\n- AMZN 亚马逊 财报：来源未读取（活动页面为动态空壳；已读取官方新闻入口，但未取得完整财报日期公告，日期及发布／会议时间未核实。）\n- GOOGL Alphabet 财报：来源未读取（投资者主页及活动页只返回栏目，未取得动态事件列表；日期及发布／会议时间未核实。）\n- META Meta 财报：部分核验（页面显示等待后续活动信息，历史／完整动态列表未取得，不能确认查询范围内无财报。）\n- TSLA 特斯拉 财报：日期尚未宣布（2026 Q3 的 Earnings Date 字段为空；未提供该次财报发布及会议计划日期。）\n- AMD AMD 财报：日期尚未宣布（当前官方活动页明确无已安排的未来活动；最近列出的财报为 8 月 4 日，下一次日期未列出。）\n- SPCX SpaceX 财报：日期尚未宣布（浏览器已加载完整活动页，当前无未来活动；2026 年归档最近财报为 8 月 4 日，下一次日期未列出。）"
+}

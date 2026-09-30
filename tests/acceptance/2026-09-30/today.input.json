@@ -1,0 +1,192 @@
+{
+  "query_started_at": "2026-09-30T08:43:11Z",
+  "range": {
+    "start_date": "2026-09-30",
+    "end_date": "2026-09-30",
+    "timezone": "America/New_York"
+  },
+  "query": {
+    "instruments": [
+      "ES",
+      "NQ",
+      "GC"
+    ],
+    "categories": [
+      "macro",
+      "earnings",
+      "expiry"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": []
+  },
+  "events": [
+    {
+      "type": "pce",
+      "source_id": "bea",
+      "url": "https://apps.bea.gov/API/signup/release_dates.json",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "exact",
+      "at": "2026-09-30T12:30:00Z",
+      "note": "Personal Income and Outlays 同次包含总体及核心 PCE，合并展示。"
+    },
+    {
+      "type": "us_quarterly_opex",
+      "source_id": "cboe",
+      "url": "https://cdn.cboe.com/resources/options/Cboe2026OPTIONSCalendar.pdf",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "date",
+      "date": "2026-09-30",
+      "timezone": "America/New_York",
+      "note": "官方图例为季末 End-of-Quarter 期权，到收盘；未核对具体产品结算时刻，保留日期精度。"
+    },
+    {
+      "type": "gc_first_notice",
+      "source_id": "cme_gc_futures",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "date",
+      "date": "2026-09-30",
+      "timezone": "America/Chicago",
+      "contract": "GCV26",
+      "note": "2026 年 10 月黄金期货第一通知日；不是经纪商最后平仓时刻。"
+    }
+  ],
+  "coverage": [
+    {
+      "source_id": "fed",
+      "status": "checked",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已核对 2026 会议日历及 9 月活动页；9 月会议为 15–16 日，下一次为 10 月 27–28 日，查询当日无决议／记者会。"
+    },
+    {
+      "source_id": "bls_cpi",
+      "status": "checked",
+      "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已核对完整发布日历；邻近发布日为 9 月 11 日及 10 月 14 日，查询当日无 CPI 发布。"
+    },
+    {
+      "source_id": "bls_jobs",
+      "status": "checked",
+      "url": "https://www.bls.gov/schedule/news_release/empsit.htm",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已核对完整就业报告发布日历；邻近发布日为 9 月 4 日及 10 月 2 日，查询当日无非农发布。"
+    },
+    {
+      "source_id": "bea",
+      "status": "checked",
+      "url": "https://apps.bea.gov/API/signup/release_dates.json",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已读取官方 JSON 的 Personal Income and Outlays 项；当日计划时刻为 12:30 UTC，文件更新时间不作为本次核验时间。"
+    },
+    {
+      "source_id": "cboe",
+      "status": "checked",
+      "url": "https://cdn.cboe.com/resources/options/Cboe2026OPTIONSCalendar.pdf",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已查看 2026 官方 PDF 的颜色图例及日期；9 月 30 日为 End-of-Quarter，标准月度到期为 9 月 18 日及 10 月 16 日。"
+    },
+    {
+      "source_id": "cme_es",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "浏览器已读取完整当前合约日期表；最近未来季度合约 ESZ26 最后交易日为 12 月 18 日，查询当日无节点。"
+    },
+    {
+      "source_id": "cme_nq",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/equities/nasdaq/e-mini-nasdaq-100.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "浏览器已读取完整当前合约日期表；最近未来季度合约 NQZ26 最后交易日为 12 月 18 日，查询当日无节点。"
+    },
+    {
+      "source_id": "cme_gc_options",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.options.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已通过浏览器读取 OG 月度日历，并核对现行 COMEX 115 标的月份规则及黄金期权规格的 13:30 美东终止时刻。规则：https://www.cmegroup.com/rulebook/COMEX/1a/115.pdf ；规格：https://www.cmegroup.com/markets/metals/precious/gold.contractSpecs.options.html#optionProductId=192；当日无标准月度期权到期。"
+    },
+    {
+      "source_id": "cme_gc_futures",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "浏览器已对照表格列头读取当前各合约；GCV26 第一通知日为 9 月 30 日，与 9 月 29 日的第一持仓日不同。"
+    },
+    {
+      "source_id": "earnings:NVDA",
+      "status": "not_announced",
+      "url": "https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已通过浏览器加载活动列表；最近财报为 8 月 26 日，活动页未列下一次财报日期，不能按往年周期推算。"
+    },
+    {
+      "source_id": "earnings:AAPL",
+      "status": "unavailable",
+      "url": "https://investor.apple.com/investor-relations/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "HTTP 抽取只取得投资者页面栏目，未取得财报日历正文；本次日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:MSFT",
+      "status": "not_announced",
+      "url": "https://www.microsoft.com/en-us/investor/default",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "官方页面明确说明下一次财报日期将另行宣布。"
+    },
+    {
+      "source_id": "earnings:AMZN",
+      "status": "unavailable",
+      "url": "https://ir.aboutamazon.com/events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "活动页面为动态空壳；已读取官方新闻入口，但未取得完整财报日期公告，日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:GOOGL",
+      "status": "unavailable",
+      "url": "https://abc.xyz/investor/events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "投资者主页及活动页只返回栏目，未取得动态事件列表；日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:META",
+      "status": "partial",
+      "url": "https://investor.atmeta.com/investor-events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "页面显示等待后续活动信息，历史／完整动态列表未取得，不能确认查询范围内无财报。"
+    },
+    {
+      "source_id": "earnings:TSLA",
+      "status": "not_announced",
+      "url": "https://ir.tesla.com/",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "2026 Q3 的 Earnings Date 字段为空；未提供该次财报发布及会议计划日期。"
+    },
+    {
+      "source_id": "earnings:AMD",
+      "status": "not_announced",
+      "url": "https://ir.amd.com/news-events/ir-calendar",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "当前官方活动页明确无已安排的未来活动；最近列出的财报为 8 月 4 日，下一次日期未列出。"
+    },
+    {
+      "source_id": "earnings:SPCX",
+      "status": "not_announced",
+      "url": "https://ir.spacex.com/events/",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "浏览器已加载完整活动页，当前无未来活动；2026 年归档最近财报为 8 月 4 日，下一次日期未列出。"
+    }
+  ]
+}

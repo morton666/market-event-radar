@@ -1,0 +1,6 @@
+interface:
+  display_name: "交易红色事件雷达"
+  short_description: "查询 ES、NQ、GC 的宏观、财报和合约事件，生成双时区中文盘前摘要"
+  default_prompt: "使用 $market-event-radar 核验今天 ES、NQ、GC 的重要事件，输出中文摘要和 JSON，并突出未来 4 小时的提醒。"
+policy:
+  allow_implicit_invocation: true

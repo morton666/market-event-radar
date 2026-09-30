@@ -1,0 +1,92 @@
+{
+  "query_started_at": "2026-09-30T08:43:11Z",
+  "range": {
+    "start_date": "2026-09-30",
+    "end_date": "2026-12-29",
+    "timezone": "America/New_York"
+  },
+  "query": {
+    "instruments": [
+      "GC"
+    ],
+    "categories": [
+      "expiry"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": [
+      "GCZ26"
+    ]
+  },
+  "events": [
+    {
+      "type": "gc_options_expiry",
+      "source_id": "cme_gc_options",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.options.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "exact",
+      "at": "2026-10-27T13:30:00-04:00",
+      "contract": "GCZ26",
+      "option_contract": "OGX26",
+      "note": "2026 年 11 月 OG 期权，标的为 2026 年 12 月 GC；日期来自当前日历，13:30 ET 来自现行合约规格。"
+    },
+    {
+      "type": "gc_options_expiry",
+      "source_id": "cme_gc_options",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.options.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "exact",
+      "at": "2026-11-24T13:30:00-05:00",
+      "contract": "GCZ26",
+      "option_contract": "OGZ26",
+      "note": "2026 年 12 月 OG 期权，标的为 2026 年 12 月 GC；采用交易所已公布日期及调整，时刻来自现行合约规格。"
+    },
+    {
+      "type": "gc_first_notice",
+      "source_id": "cme_gc_futures",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "date",
+      "date": "2026-11-30",
+      "timezone": "America/Chicago",
+      "contract": "GCZ26",
+      "note": "2026 年 12 月黄金期货第一通知日；未补造分钟时刻。"
+    },
+    {
+      "type": "gc_last_trade",
+      "source_id": "cme_gc_futures",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "precision": "date",
+      "date": "2026-12-29",
+      "timezone": "America/Chicago",
+      "contract": "GCZ26",
+      "note": "2026 年 12 月黄金期货最后交易日；本次只核对日期，未补造分钟时刻。"
+    }
+  ],
+  "coverage": [
+    {
+      "source_id": "cme_gc_options",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.options.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已通过浏览器读取 OG 月度日历，并核对现行 COMEX 115 标的月份规则及黄金期权规格的 13:30 美东终止时刻。规则：https://www.cmegroup.com/rulebook/COMEX/1a/115.pdf ；规格：https://www.cmegroup.com/markets/metals/precious/gold.contractSpecs.options.html#optionProductId=192；已核对所查范围内全部以 GCZ26 为标的的标准月度 OG 期权。"
+    },
+    {
+      "source_id": "cme_gc_futures",
+      "status": "checked",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold.calendar.html",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已读取 GCZ26 的 FIRST NOTICE 30 NOV 2026 和 LAST TRADE 29 DEC 2026 列；采用表内公布日期。"
+    }
+  ]
+}

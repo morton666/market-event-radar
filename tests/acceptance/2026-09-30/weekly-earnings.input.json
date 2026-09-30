@@ -1,0 +1,95 @@
+{
+  "query_started_at": "2026-09-30T08:43:11Z",
+  "range": {
+    "start_date": "2026-09-28",
+    "end_date": "2026-10-04",
+    "timezone": "America/New_York"
+  },
+  "query": {
+    "instruments": [
+      "ES",
+      "NQ"
+    ],
+    "categories": [
+      "earnings"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": []
+  },
+  "events": [],
+  "coverage": [
+    {
+      "source_id": "earnings:NVDA",
+      "status": "not_announced",
+      "url": "https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "已通过浏览器加载活动列表；最近财报为 8 月 26 日，活动页未列下一次财报日期，不能按往年周期推算。"
+    },
+    {
+      "source_id": "earnings:AAPL",
+      "status": "unavailable",
+      "url": "https://investor.apple.com/investor-relations/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "HTTP 抽取只取得投资者页面栏目，未取得财报日历正文；本次日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:MSFT",
+      "status": "not_announced",
+      "url": "https://www.microsoft.com/en-us/investor/default",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "官方页面明确说明下一次财报日期将另行宣布。"
+    },
+    {
+      "source_id": "earnings:AMZN",
+      "status": "unavailable",
+      "url": "https://ir.aboutamazon.com/events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "活动页面为动态空壳；已读取官方新闻入口，但未取得完整财报日期公告，日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:GOOGL",
+      "status": "unavailable",
+      "url": "https://abc.xyz/investor/events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "投资者主页及活动页只返回栏目，未取得动态事件列表；日期及发布／会议时间未核实。"
+    },
+    {
+      "source_id": "earnings:META",
+      "status": "partial",
+      "url": "https://investor.atmeta.com/investor-events/default.aspx",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "页面显示等待后续活动信息，历史／完整动态列表未取得，不能确认查询范围内无财报。"
+    },
+    {
+      "source_id": "earnings:TSLA",
+      "status": "not_announced",
+      "url": "https://ir.tesla.com/",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "2026 Q3 的 Earnings Date 字段为空；未提供该次财报发布及会议计划日期。"
+    },
+    {
+      "source_id": "earnings:AMD",
+      "status": "not_announced",
+      "url": "https://ir.amd.com/news-events/ir-calendar",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "当前官方活动页明确无已安排的未来活动；最近列出的财报为 8 月 4 日，下一次日期未列出。"
+    },
+    {
+      "source_id": "earnings:SPCX",
+      "status": "not_announced",
+      "url": "https://ir.spacex.com/events/",
+      "checked_at": "2026-09-30T09:28:10Z",
+      "note": "浏览器已加载完整活动页，当前无未来活动；2026 年归档最近财报为 8 月 4 日，下一次日期未列出。"
+    }
+  ]
+}

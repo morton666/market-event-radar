@@ -1,0 +1,52 @@
+{
+  "calendar_timezone": "America/New_York",
+  "display_timezone": "Asia/Shanghai",
+  "imminent_hours": 4,
+  "verification_max_age_minutes": 60,
+  "default_instruments": ["ES", "NQ", "GC"],
+  "imminent_levels": ["red", "orange"],
+  "levels": {
+    "red": {"label": "红色", "marker": "🔴", "rank": 3},
+    "orange": {"label": "到期提醒", "marker": "🟠", "rank": 2},
+    "background": {"label": "背景信息", "marker": "⚪", "rank": 1}
+  },
+  "type_aliases": {"core_cpi": "cpi", "core_pce": "pce"},
+  "companies": {
+    "NVDA": {"name": "英伟达", "domains": ["nvidia.com"], "urls": ["https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx", "https://investor.nvidia.com/news/press-release/default.aspx"]},
+    "AAPL": {"name": "苹果", "domains": ["apple.com"], "urls": ["https://investor.apple.com/", "https://www.apple.com/newsroom/", "https://www.apple.com/investor/earnings-call/"]},
+    "MSFT": {"name": "微软", "domains": ["microsoft.com"], "urls": ["https://www.microsoft.com/en-us/investor/", "https://www.microsoft.com/en-us/investor/events", "https://news.microsoft.com/source/"]},
+    "AMZN": {"name": "亚马逊", "domains": ["aboutamazon.com", "amazon.com"], "urls": ["https://ir.aboutamazon.com/events/default.aspx", "https://press.aboutamazon.com/"]},
+    "GOOGL": {"name": "Alphabet", "domains": ["abc.xyz"], "urls": ["https://abc.xyz/investor/", "https://abc.xyz/investor/events/default.aspx"]},
+    "META": {"name": "Meta", "domains": ["atmeta.com"], "urls": ["https://investor.atmeta.com/investor-events/default.aspx", "https://investor.atmeta.com/investor-news/default.aspx"]},
+    "TSLA": {"name": "特斯拉", "domains": ["tesla.com"], "urls": ["https://ir.tesla.com/"]},
+    "AMD": {"name": "AMD", "domains": ["amd.com"], "urls": ["https://ir.amd.com/news-events/ir-calendar", "https://ir.amd.com/news-events/press-releases"]},
+    "SPCX": {"name": "SpaceX", "domains": ["spacex.com"], "urls": ["https://ir.spacex.com/events/", "https://ir.spacex.com/updates/"]}
+  },
+  "sources": {
+    "fed": {"name": "美联储 FOMC", "domains": ["federalreserve.gov"], "urls": ["https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm", "https://www.federalreserve.gov/newsevents/calendar.htm"]},
+    "bls_cpi": {"name": "BLS CPI 日历", "domains": ["bls.gov"], "urls": ["https://www.bls.gov/schedule/news_release/cpi.htm", "https://www.bls.gov/schedule/news_release/bls.ics"]},
+    "bls_jobs": {"name": "BLS 就业报告日历", "domains": ["bls.gov"], "urls": ["https://www.bls.gov/schedule/news_release/empsit.htm", "https://www.bls.gov/schedule/news_release/bls.ics"]},
+    "bea": {"name": "BEA PCE 日历", "domains": ["bea.gov"], "urls": ["https://www.bea.gov/news/schedule", "https://www.bea.gov/news/schedule/icalendar", "https://apps.bea.gov/API/signup/release_dates.json", "https://www.bea.gov/news/schedule/ics/online-calendar-subscription.ics"]},
+    "cboe": {"name": "Cboe 月度／季度期权日历", "domains": ["cboe.com"], "urls": ["https://www.cboe.com/about/hours/us-options/"]},
+    "cme_es": {"name": "CME ES 期货日历", "domains": ["cmegroup.com"], "urls": ["https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.calendar.html"]},
+    "cme_nq": {"name": "CME NQ 期货日历", "domains": ["cmegroup.com"], "urls": ["https://www.cmegroup.com/markets/equities/nasdaq/e-mini-nasdaq-100.calendar.html"]},
+    "cme_gc_options": {"name": "CME 黄金月度期权日历", "domains": ["cmegroup.com"], "urls": ["https://www.cmegroup.com/markets/metals/precious/gold.calendar.options.html"]},
+    "cme_gc_futures": {"name": "CME 黄金期货日历", "domains": ["cmegroup.com"], "urls": ["https://www.cmegroup.com/markets/metals/precious/gold.calendar.html", "https://www.cmegroup.com/notices/clearing.html"]}
+  },
+  "event_types": {
+    "fomc_decision": {"title": "FOMC 利率决议", "category": "macro", "source_id": "fed", "instruments": {"ES": "red", "NQ": "red", "GC": "red"}},
+    "fomc_press_conference": {"title": "FOMC 记者会", "category": "macro", "source_id": "fed", "instruments": {"ES": "red", "NQ": "red", "GC": "red"}},
+    "cpi": {"title": "美国 CPI / 核心 CPI", "category": "macro", "source_id": "bls_cpi", "instruments": {"ES": "red", "NQ": "red", "GC": "red"}},
+    "pce": {"title": "美国 PCE / 核心 PCE", "category": "macro", "source_id": "bea", "instruments": {"ES": "red", "NQ": "red", "GC": "red"}},
+    "nonfarm_payrolls": {"title": "美国非农就业报告", "category": "macro", "source_id": "bls_jobs", "instruments": {"ES": "red", "NQ": "red", "GC": "red"}},
+    "earnings_release": {"title": "财报发布", "category": "earnings", "instruments": {"ES": "red", "NQ": "red", "GC": "background"}},
+    "earnings_call": {"title": "财报电话会议", "category": "earnings", "instruments": {"ES": "red", "NQ": "red", "GC": "background"}},
+    "us_monthly_opex": {"title": "美股月度集中期权到期", "category": "expiry", "source_id": "cboe", "instruments": {"ES": "orange", "NQ": "orange"}},
+    "us_quarterly_opex": {"title": "美股季末季度期权到期", "category": "expiry", "source_id": "cboe", "instruments": {"ES": "orange", "NQ": "orange"}},
+    "es_futures_expiry": {"title": "ES 季度期货到期", "category": "expiry", "source_id": "cme_es", "requires_contract": "ES", "instruments": {"ES": "orange"}},
+    "nq_futures_expiry": {"title": "NQ 季度期货到期", "category": "expiry", "source_id": "cme_nq", "requires_contract": "NQ", "instruments": {"NQ": "orange"}},
+    "gc_options_expiry": {"title": "GC 月度期权到期", "category": "expiry", "source_id": "cme_gc_options", "requires_contract": "GC", "instruments": {"GC": "orange"}},
+    "gc_first_notice": {"title": "GC 期货第一通知日", "category": "expiry", "source_id": "cme_gc_futures", "requires_contract": "GC", "instruments": {"GC": "red"}},
+    "gc_last_trade": {"title": "GC 期货最后交易日", "category": "expiry", "source_id": "cme_gc_futures", "requires_contract": "GC", "instruments": {"GC": "red"}}
+  }
+}
