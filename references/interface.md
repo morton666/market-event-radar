@@ -15,7 +15,7 @@ python3 scripts/query_events.py --input 文件或- [查询选项] [--format both
 - `--categories macro earnings expiry`：类别过滤，默认全部。
 - `--companies NVDA AMD SPCX`：财报公司过滤；未指定时使用完整配置名单。只查财报时同时设置 categories earnings。
 - `--contracts GCZ26`：具体合约过滤，可接受 GCZ2026；同类未匹配合约不显示，宏观和财报仍按品种过滤。只查合约节点时同时设置 categories expiry。
-- `--config PATH`：替换默认配置；默认配置相对于脚本定位，与当前工作目录无关。
+- `--config PATH`：替换 `assets/config.json` 默认配置；默认文件相对于脚本定位，与当前工作目录无关，自定义文件建议传绝对路径。升级前若自定义了旧版根目录的 config.json，应另存至技能目录外并显式指定。
 - `--now ISO8601`：固定查询时刻供测试与复现，必须带偏移，例如 `2026-09-30T08:43:11Z`。实时查询省略此参数。
 - `--format both`：中文 Markdown + JSON，默认；json 包含 `summary_zh`，方便调用方显示摘要。
 
@@ -29,7 +29,7 @@ python3 scripts/query_events.py --input 文件或- [查询选项] [--format both
 
 | 字段 | 含义 |
 |---|---|
-| `type` | config.json 中的事件类型，或 core_cpi / core_pce 别名 |
+| `type` | assets/config.json 中的事件类型，或 core_cpi / core_pce 别名 |
 | `precision` | exact、session 或 date |
 | `status` | confirmed 或 unconfirmed；默认 confirmed，表示已确认的计划信息 |
 | `at` | exact 时必填：带 UTC 偏移的 ISO8601 时间 |
@@ -71,12 +71,26 @@ python3 scripts/query_events.py --input 文件或- [查询选项] [--format both
 
 ## 输出
 
-JSON 包含 `schema_version`、`generated_at`、`query_started_at`、`range`、`filters`、`coverage`、`events`、`imminent_event_ids`、`warnings`、`summary_zh`。
+JSON 包含 `schema_version`、`generated_at`、`query_started_at`、`range`、`filters`、`coverage`、`events`、`imminent_event_ids`、`warnings`、`summary_zh`，以及新增的 `run_status`、`source_health`。新增字段保持 schema_version 1 的向后兼容。
 
-每个事件包含稳定 `id`、type/title/category、symbol/contract、`contract_month`（例如 2026-12）、`levels`（各相关品种级别）、`priority`、`precision`、`confirmation_status`、`verification_status`、`at_utc`、双时区文本、日期候选、`minutes_to_event`、`schedule_status`、来源链接及核验时间。
+每个事件包含 `id`（由类型、公司、合约、日期生成，改期时会改变，不用作跨日改期标识）、type/title/category、symbol/contract、`contract_month`（例如 2026-12）、`levels`（各相关品种级别）、`priority`、`precision`、`confirmation_status`、`verification_status`、`at_utc`、双时区文本、日期候选、`minutes_to_event`、`schedule_status`、来源链接及核验时间。
 
 只有 confirmed + 本次核验有效 + exact + 配置的重要级别，且剩余时间满足 **0 ≤ 时间差 ≤ 4 小时**，才进入 imminent_event_ids。过去事件仍保留在日历中。没有精确时间时 at_utc、minutes_to_event 为 null；显示已知的日期／盘前盘后和保守的北京时间日期范围，不生成假的准确时刻。
 
 同次 CPI / 核心 CPI、PCE / 核心 PCE 合并；FOMC 双事件、财报发布／会议、不同合约保留独立 ID。来源对同一事件的精确时间或 session 信息相冲突时降为日期精度、unconfirmed，并显示冲突说明。
 
 coverage.status 为 complete、partial 或 unavailable；not_announced 和 stale 都不算完整覆盖。缺失状态不等于交易安全信号。结构错误退出码为 2，输出 JSON error；来源不完整仍返回可用结果，退出码为 0，调用方根据 coverage 判定完整性。
+
+## 运行健康状态
+
+`coverage` 表示日历信息是否完整，`run_status` 表示本次核验是否正常完成，两个概念分别判断：
+
+| run_status | 规则 |
+|---|---|
+| `ok` | 所需来源均为 checked 或 not_announced，事件没有待核验问题 |
+| `partial` | 非关键来源有 partial、unavailable、stale 或事件冲突，但仍有可用来源 |
+| `failed` | 任一关键来源缺失／部分核验／过期，或所有所需来源均 unavailable／stale |
+
+关键类别默认 macro、expiry，由 `daily.critical_categories` 修改；只考虑本次过滤后所需的来源。`source_health` 包含 `issue_source_ids`、`critical_issue_source_ids`、`not_announced_source_ids`。日期尚未宣布可同时得到 `run_status=ok` 和 `coverage.status=partial`；此时不能声称范围内没有财报。
+
+普通查询入口保持原退出码。每日入口根据运行状态返回 0、3、4，并先保存有效报告，细节见 [Hermes 接入说明](hermes.md)。

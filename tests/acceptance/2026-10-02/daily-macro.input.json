@@ -1,0 +1,120 @@
+{
+  "query_started_at": "2026-10-02T11:41:09.184013Z",
+  "range": {
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-09",
+    "timezone": "America/New_York"
+  },
+  "query": {
+    "instruments": [
+      "ES",
+      "NQ",
+      "GC"
+    ],
+    "categories": [
+      "macro"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": []
+  },
+  "events": [
+    {
+      "type": "nonfarm_payrolls",
+      "precision": "exact",
+      "at": "2026-10-02T08:30:00-04:00",
+      "source_id": "bls_jobs",
+      "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+      "checked_at": "2026-10-02T11:43:17.625591Z",
+      "note": "统计参考月份：2026年9月；此处仅记录官方计划发布时间。"
+    }
+  ],
+  "coverage": [
+    {
+      "source_id": "fed",
+      "status": "checked",
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "checked_at": "2026-10-02T11:43:17.625591Z",
+      "note": "已核对十月官方日历；10月28日为FOMC决议及记者会，不在本次范围。10月7日会议纪要不属于本版覆盖类型。"
+    },
+    {
+      "source_id": "bls_cpi",
+      "status": "checked",
+      "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "checked_at": "2026-10-02T11:43:17.625591Z",
+      "note": "已核对完整发布日历；下次CPI为10月14日，本次范围无CPI。ICS读取工具不支持text/calendar，已从官方HTML核验。"
+    },
+    {
+      "source_id": "bls_jobs",
+      "status": "checked",
+      "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+      "checked_at": "2026-10-02T11:43:17.625591Z",
+      "note": "已核对Employment Situation发布表及十月日历；9月数据计划10月2日08:30公布，月历注明全部时间为Eastern Time。"
+    },
+    {
+      "source_id": "bea",
+      "status": "checked",
+      "url": "https://apps.bea.gov/API/signup/release_dates.json",
+      "checked_at": "2026-10-02T11:43:17.625591Z",
+      "note": "已读取官方JSON的Personal Income and Outlays完整序列；9月30日后下一次为10月29日，本次范围无PCE。"
+    }
+  ],
+  "required_sources": {
+    "fed": {
+      "name": "美联储 FOMC",
+      "domains": [
+        "federalreserve.gov"
+      ],
+      "urls": [
+        "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+        "https://www.federalreserve.gov/newsevents/calendar.htm"
+      ]
+    },
+    "bls_cpi": {
+      "name": "BLS CPI 日历",
+      "domains": [
+        "bls.gov"
+      ],
+      "urls": [
+        "https://www.bls.gov/schedule/news_release/cpi.htm",
+        "https://www.bls.gov/schedule/news_release/bls.ics"
+      ]
+    },
+    "bls_jobs": {
+      "name": "BLS 就业报告日历",
+      "domains": [
+        "bls.gov"
+      ],
+      "urls": [
+        "https://www.bls.gov/schedule/news_release/empsit.htm",
+        "https://www.bls.gov/schedule/news_release/bls.ics"
+      ]
+    },
+    "bea": {
+      "name": "BEA PCE 日历",
+      "domains": [
+        "bea.gov"
+      ],
+      "urls": [
+        "https://www.bea.gov/news/schedule",
+        "https://www.bea.gov/news/schedule/icalendar",
+        "https://apps.bea.gov/API/signup/release_dates.json",
+        "https://www.bea.gov/news/schedule/ics/online-calendar-subscription.ics"
+      ]
+    }
+  },
+  "daily": {
+    "run_id": "e05d8d679f22406384f0184ded0ebca9",
+    "date_et": "2026-10-02",
+    "preview_days": 7
+  }
+}

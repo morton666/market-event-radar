@@ -3,6 +3,16 @@
   "display_timezone": "Asia/Shanghai",
   "imminent_hours": 4,
   "verification_max_age_minutes": 60,
+  "daily": {
+    "preview_days": 7,
+    "preview_limit": 12,
+    "critical_categories": ["macro", "expiry"],
+    "collection": {
+      "request_timeout_seconds": 20,
+      "attempts_per_source": 2,
+      "total_budget_seconds": 480
+    }
+  },
   "default_instruments": ["ES", "NQ", "GC"],
   "imminent_levels": ["red", "orange"],
   "levels": {

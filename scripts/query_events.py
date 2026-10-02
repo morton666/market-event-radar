@@ -18,7 +18,9 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 UTC = timezone.utc
 CONTRACT_MONTHS = {code: month for month, code in enumerate("FGHJKMNQUVXZ", 1)}
-DEFAULT_CONFIG = Path(__file__).resolve().parents[1] / "config.json"
+DEFAULT_CONFIG = Path(__file__).resolve().parents[1] / "assets" / "config.json"
+DAILY_DEFAULTS = {"preview_days": 7, "preview_limit": 12, "critical_categories": ["macro", "expiry"]}
+COLLECTION_DEFAULTS = {"request_timeout_seconds": 20, "attempts_per_source": 2, "total_budget_seconds": 480}
 SESSIONS = {"before_open": "盘前", "after_close": "盘后"}
 COVERAGE_LABELS = {
     "checked": "已核验", "not_announced": "日期尚未宣布", "partial": "部分核验",
@@ -126,9 +128,29 @@ def load_config(path: str | Path = DEFAULT_CONFIG) -> dict:
         for target in cfg.get("type_aliases", {}).values():
             if target not in cfg["event_types"]:
                 raise InputError("事件别名指向未知类型")
+        daily_settings(cfg)
     except (KeyError, TypeError, AttributeError) as exc:
         raise InputError(f"配置结构无效：{exc}") from exc
     return cfg
+
+
+def daily_settings(cfg: dict) -> dict:
+    raw = cfg.get("daily", {})
+    if not isinstance(raw, dict) or not isinstance(raw.get("collection", {}), dict):
+        raise InputError("daily 和 daily.collection 必须为对象")
+    settings = {**DAILY_DEFAULTS, **raw}
+    settings["collection"] = {**COLLECTION_DEFAULTS, **raw.get("collection", {})}
+    for field in ("preview_days", "preview_limit"):
+        value = settings[field]
+        if isinstance(value, bool) or not isinstance(value, int) or value < (0 if field == "preview_days" else 1):
+            raise InputError(f"daily.{field} 必须为{'非负' if field == 'preview_days' else '正'}整数")
+    categories = settings["critical_categories"]
+    if not isinstance(categories, list) or not all(isinstance(c, str) and c in {"macro", "earnings", "expiry"} for c in categories):
+        raise InputError("daily.critical_categories 必须是有效类别列表")
+    for field, value in settings["collection"].items():
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise InputError(f"daily.collection.{field} 必须为正整数")
+    return settings
 
 
 def all_sources(cfg: dict) -> dict:
@@ -496,8 +518,33 @@ def build_report(payload: dict, query: Query, cfg: dict) -> dict:
               "range": {"start_date": query.start.isoformat(), "end_date": query.end.isoformat(), "timezone": cfg["calendar_timezone"]},
               "filters": query.filters(), "coverage": {"status": overall, "sources": coverage},
               "imminent_event_ids": ordered_ids, "events": kept, "warnings": list(dict.fromkeys(warnings))}
+    report.update(assess_health(coverage, kept, query, cfg))
     report["summary_zh"] = render_summary(report, cfg)
     return report
+
+
+def assess_health(coverage: list[dict], events: list[dict], query: Query, cfg: dict) -> dict:
+    """Retrieval health is distinct from whether a future earnings date is known."""
+    critical = set()
+    critical_categories = daily_settings(cfg)["critical_categories"]
+    for rule in cfg["event_types"].values():
+        if (rule["category"] not in critical_categories
+                or rule["category"] not in query.categories
+                or not set(rule["instruments"]) & set(query.instruments)):
+            continue
+        critical.update((f"earnings:{s}" for s in query.companies) if rule["category"] == "earnings" else [rule["source_id"]])
+    issues = {s["source_id"] for s in coverage if s["status"] not in {"checked", "not_announced"}}
+    issues.update(s["source_id"] for e in events
+                  if e["verification_status"] != "verified" or e["confirmation_status"] != "confirmed"
+                  for s in e["sources"])
+    critical_issues = issues & critical
+    # Partially read sources can still contribute useful results in a noncritical query.
+    has_usable_source = any(s["status"] in {"checked", "not_announced", "partial"} for s in coverage)
+    status = "failed" if critical_issues or (coverage and not has_usable_source) else "partial" if issues else "ok"
+    return {"run_status": status, "source_health": {
+        "issue_source_ids": sorted(issues), "critical_issue_source_ids": sorted(critical_issues),
+        "not_announced_source_ids": [s["source_id"] for s in coverage if s["status"] == "not_announced"],
+    }}
 
 
 def markdown_cell(value) -> str:

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-02T11:45:12.074357Z",
+  "query_started_at": "2026-10-02T11:41:09.184013Z",
+  "range": {
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-09",
+    "timezone": "America/New_York"
+  },
+  "filters": {
+    "instruments": [
+      "ES",
+      "NQ",
+      "GC"
+    ],
+    "categories": [
+      "macro"
+    ],
+    "companies": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "GOOGL",
+      "META",
+      "TSLA",
+      "AMD",
+      "SPCX"
+    ],
+    "contracts": []
+  },
+  "coverage": {
+    "status": "complete",
+    "sources": [
+      {
+        "source_id": "fed",
+        "name": "美联储 FOMC",
+        "status": "checked",
+        "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+        "checked_at": "2026-10-02T11:43:17.625591Z",
+        "note": "已核对十月官方日历；10月28日为FOMC决议及记者会，不在本次范围。10月7日会议纪要不属于本版覆盖类型。"
+      },
+      {
+        "source_id": "bls_cpi",
+        "name": "BLS CPI 日历",
+        "status": "checked",
+        "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+        "checked_at": "2026-10-02T11:43:17.625591Z",
+        "note": "已核对完整发布日历；下次CPI为10月14日，本次范围无CPI。ICS读取工具不支持text/calendar，已从官方HTML核验。"
+      },
+      {
+        "source_id": "bls_jobs",
+        "name": "BLS 就业报告日历",
+        "status": "checked",
+        "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+        "checked_at": "2026-10-02T11:43:17.625591Z",
+        "note": "已核对Employment Situation发布表及十月日历；9月数据计划10月2日08:30公布，月历注明全部时间为Eastern Time。"
+      },
+      {
+        "source_id": "bea",
+        "name": "BEA PCE 日历",
+        "status": "checked",
+        "url": "https://apps.bea.gov/API/signup/release_dates.json",
+        "checked_at": "2026-10-02T11:43:17.625591Z",
+        "note": "已读取官方JSON的Personal Income and Outlays完整序列；9月30日后下一次为10月29日，本次范围无PCE。"
+      }
+    ]
+  },
+  "imminent_event_ids": [
+    "3f1d525af7fdbd7b"
+  ],
+  "events": [
+    {
+      "type": "nonfarm_payrolls",
+      "title": "美国非农就业报告",
+      "category": "macro",
+      "symbol": null,
+      "contract": null,
+      "contract_month": null,
+      "option_contract": null,
+      "precision": "exact",
+      "confirmation_status": "confirmed",
+      "verification_status": "verified",
+      "source_timezone": "America/New_York",
+      "session": null,
+      "event_date": "2026-10-02",
+      "sources": [
+        {
+          "source_id": "bls_jobs",
+          "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+          "checked_at": "2026-10-02T11:43:17.625591Z"
+        }
+      ],
+      "notes": [
+        "统计参考月份：2026年9月；此处仅记录官方计划发布时间。"
+      ],
+      "id": "3f1d525af7fdbd7b",
+      "levels": {
+        "ES": "red",
+        "NQ": "red",
+        "GC": "red"
+      },
+      "priority": "red",
+      "at_utc": "2026-10-02T12:30:00Z",
+      "minutes_to_event": 44.8,
+      "time_et": "2026-10-02 08:30:00 EDT",
+      "time_beijing": "2026-10-02 20:30:00 CST",
+      "date_et_candidates": [
+        "2026-10-02"
+      ],
+      "date_beijing_candidates": [
+        "2026-10-02"
+      ],
+      "schedule_status": "scheduled"
+    }
+  ],
+  "warnings": [],
+  "run_status": "ok",
+  "source_health": {
+    "issue_source_ids": [],
+    "critical_issue_source_ids": [],
+    "not_announced_source_ids": []
+  },
+  "summary_zh": "交易盘前简报｜2026-10-02（美东日期）\n查询：07:45 EDT / 北京 2026-10-02 19:45；关注 ES / NQ / GC\n查询类别：宏观\n核验运行：正常\n\n未来 4 小时：\n- 🔴 美国非农就业报告｜美东 2026-10-02 08:30:00 EDT；北京 2026-10-02 20:30:00 CST｜距离计划时间 44.8 分钟 [来源](<https://www.bls.gov/schedule/2026/10_sched.htm>)；统计参考月份：2026年9月；此处仅记录官方计划发布时间。\n\n今天全部事件：\n- 🔴 美国非农就业报告｜美东 2026-10-02 08:30:00 EDT；北京 2026-10-02 20:30:00 CST｜计划时间未到 [来源](<https://www.bls.gov/schedule/2026/10_sched.htm>)；统计参考月份：2026年9月；此处仅记录官方计划发布时间。\n\n未来 7 天重点预告（不含今天）：\n- 已核验信息中暂无可列出的重点事件；仍须结合下方来源状态。\n\n来源：4/4 完整核验；0 个日期未宣布；0 个缺失或待核验。",
+  "daily": {
+    "run_id": "e05d8d679f22406384f0184ded0ebca9",
+    "date_et": "2026-10-02",
+    "preview_days": 7,
+    "exit_code": 0,
+    "today_event_count": 1,
+    "preview_event_count": 0,
+    "preview_shown_count": 0
+  },
+  "artifacts": {
+    "input": "/private/tmp/market-event-radar-live-daily/runs/2026-10-02/e05d8d679f22406384f0184ded0ebca9/input.json",
+    "report_json": "/private/tmp/market-event-radar-live-daily/runs/2026-10-02/e05d8d679f22406384f0184ded0ebca9/report.json",
+    "summary_markdown": "/private/tmp/market-event-radar-live-daily/runs/2026-10-02/e05d8d679f22406384f0184ded0ebca9/summary.md"
+  }
+}
