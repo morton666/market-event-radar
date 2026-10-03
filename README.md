@@ -45,6 +45,8 @@ hermes skills install https://raw.githubusercontent.com/morton666/market-event-r
 
 安装后应包含 `scripts/query_events.py`、`scripts/daily_brief.py`、`assets/config.json` 及 SKILL.md 链接的 references、examples 文件。只下载 SKILL.md 无法运行脚本。Hub 安装不一定包含仓库测试；需要测试时使用下方 Git 克隆方式。
 
+若代理网关使 DNS 返回 `198.18.x.x`，URL 安装可能在发出请求前被拦截；当前 Hermes 提供 `security.fake_ip_ranges` 配置。官网返回 403 则需要检查网页提取后端和访问路径。具体步骤见 [Fake-IP 与来源 403 排障](references/hermes.md#fake-ip-网关和来源-403-排障)，与 Git 克隆安装路线可以配合使用。
+
 ### 其他 AI 或本地终端：克隆仓库
 
 以下命令适用于 macOS 和 Linux；示例目录可换成自己的工作目录：

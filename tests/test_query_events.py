@@ -5,6 +5,7 @@ import io
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from datetime import timedelta
 from pathlib import Path
@@ -292,8 +293,9 @@ class RadarTests(unittest.TestCase):
 
     def test_filters_survive_prepare_and_render_from_another_cwd(self):
         query, payload = self.case(["--period", "week", "--categories", "earnings", "--companies", "AMD", "SPCX"])
-        result = subprocess.run([sys.executable, str(SKILL / "scripts/query_events.py"), "--input", "-", "--format", "json", "--now", self.now],
-                                input=json.dumps(payload), capture_output=True, text=True, cwd="/private/tmp")
+        with tempfile.TemporaryDirectory() as working_directory:
+            result = subprocess.run([sys.executable, str(SKILL / "scripts/query_events.py"), "--input", "-", "--format", "json", "--now", self.now],
+                                    input=json.dumps(payload), capture_output=True, text=True, cwd=working_directory)
         self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
         report = json.loads(result.stdout)
         self.assertEqual(report["filters"]["companies"], ["AMD", "SPCX"])

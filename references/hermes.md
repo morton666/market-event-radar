@@ -10,6 +10,38 @@
 
 自定义配置复制到技能目录外，两个阶段都传同一个 `--config`。旧版根目录 config.json 的自定义值需迁入外部配置；新版默认配置在 assets/config.json。
 
+## Fake-IP 网关和来源 403 排障
+
+模型 API 网关、DNS／透明代理、网页提取服务是不同的访问路径。使用相同模型网关不代表两个 agent 从同一出口读取网页。先记录实际失败工具、错误信息和所选 web_extract 后端，分别判断：
+
+- URL 在请求前被报为 private/internal address，且 DNS 返回 198.18.x.x：检查本地代理 fake-IP 配置与 Hermes 版本。
+- 已拿到 HTTP 403／Access Denied 正文：当前访问方式被网站拒绝；单凭 403 不能断定只有出口 IP 被拉黑，浏览器指纹、请求方式及代理也可能影响结果。
+- 页面可读但只有导航／动态空壳，或内容标记 TRUNCATED：读取正文、动态组件或工具保存的全文后再判断覆盖状态。
+
+[当前 Hermes 官方文档](https://hermes-agent.nousresearch.com/docs/user-guide/security/#local-proxy-fake-ip-ranges)支持在当前 profile 的 config.yaml 声明本地代理实际使用的 fake-IP 网段。例如网关确实使用 198.18.0.0/15 时，将下面字段合并到已有 security 节点，再重启对应 Hermes 进程：
+
+```yaml
+security:
+  fake_ip_ranges:
+    - 198.18.0.0/15
+```
+
+它只豁免已声明的代理网段；其余私网目标仍受保护。先确认服务器版本包含这个配置能力，旧版可以更新，或在网关 DNS 侧让相关公网域名返回真实 IP。不要为此全局打开 allow_private_urls，也不要覆盖现有配置文件。该设置解决本地 URL 检查，网站端的 403 要继续单独核验。
+
+来源读取受阻时，先尝试 Hermes 的云端 web_extract 后端，通过服务提供方抓取官网正文。使用 hermes tools 选择已有可用的提取后端；[当前文档](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search/#per-capability-configuration)支持单独指定提取服务，例如：
+
+```yaml
+web:
+  extract_backend: firecrawl
+  cache_enabled: false
+```
+
+把这些字段合并到当前 profile，按该版本配置服务所需凭据或可用的 keyless 模式。cloud API 与部署在同一服务器的自托管服务有不同出口，切到同机服务不能证明出口问题已经解决。cache_enabled 控制 Hermes 缓存；还要核对提取服务的抓取时间与缓存说明，避免将旧正文当成本次核验。任何服务都不保证可读取每个站点，失败仍保留缺失报告。
+
+BLS 可按官方导航依次核验发布表、月度日历、全年日历或 ICS，并读取时区说明；月度／年度页面从 [BLS 日历入口](https://www.bls.gov/schedule/)进入，核对查询年度。CME 动态表受阻时，核对查询年度的官方合约日历／PDF和清算公告。备用页面只能证明其实际覆盖的类型和日期，不能把某一份 PDF 视为全部合约已核验。
+
+若云端提取仍无法覆盖关键来源，可把实时采集放到能正常访问官方来源的机器，让 Hermes 接收当次输入及来源证据。收到历史输入时保留旧 checked_at，不能通过改时间戳恢复为 checked。选择付费代理或浏览器服务前，先用实际 BLS、CME、公司 IR 页面验证覆盖效果。
+
 ## 每次运行
 
 工作目录设为安装后的技能绝对路径，状态目录使用技能外的绝对路径。以下状态目录由当前服务用户持有，无需管理员权限：
